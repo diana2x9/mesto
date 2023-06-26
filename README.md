@@ -10,3 +10,4 @@
 * JavaScript
 
 ## Ссылка на проект
+https://diana2x9.github.io/mesto/
