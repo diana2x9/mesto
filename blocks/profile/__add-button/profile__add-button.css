@@ -11,7 +11,9 @@
   background-image: url(../../../images/add-button.svg);
   background-position: center;
   background-repeat: no-repeat;
+  background-size: auto;
   cursor: pointer;
+  transition: opacity 0.5s;
 }
 
 .profile__add-button:hover {
@@ -21,7 +23,6 @@
 @media screen and (max-width:767px) {
   .profile__add-button {
     width: 282px;
-    height: 50px;
     margin: 0;
 }
 }

@@ -3,13 +3,15 @@
   background-color: transparent;
   background-repeat: no-repeat;
   background-position: center;
+  background-size: cover;
   cursor: pointer;
   border: none;
   padding: 0;
   width: 22px;
   height: 19px;
+  transition: opacity 0.5s;
 }
 
 .elements__heart-button:hover {
-  opacity: 0.6;
+  opacity: 0.5;
 }

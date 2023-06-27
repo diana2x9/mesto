@@ -1,11 +1,12 @@
 .elements__card {
   display: grid;
-  grid-template-columns: repeat(3, 282px);
+  grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
   gap: 20px 17px;
   justify-content: center;
   padding: 0;
   margin: 0 auto;
   list-style-type: none;
+  justify-items: center;
 }
 
 @media screen and (max-width:767px) {
