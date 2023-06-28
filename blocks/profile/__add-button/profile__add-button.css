@@ -11,7 +11,7 @@
   background-image: url(../../../images/add-button.svg);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: auto;
+  background-size: 22px 22px;
   cursor: pointer;
   transition: opacity 0.5s;
 }
@@ -24,5 +24,6 @@
   .profile__add-button {
     width: 282px;
     margin: 0;
+    background-size: 16px 16px;
 }
 }
