@@ -1,0 +1,5 @@
+.popup__container_open {
+  max-width: 75vw;
+  background: none;
+  padding: 0;
+}
