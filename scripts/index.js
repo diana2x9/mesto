@@ -43,7 +43,7 @@ editProfileButton.addEventListener('click', () => {
 // закрытие попапа редактирования профиля
 closeEditProfileButton.addEventListener('click', () => {
   closePopup(popupEdit);
-  });
+});
 
 //создание карточек
 function createCard(name, link) {
@@ -132,10 +132,3 @@ closeAddButton.addEventListener('click',closePopupAdd);
 popupAddForm.addEventListener('submit', addCard);
 
 closeImageButton.addEventListener('click', closePopupImage);
-
-
-
-
-
-
-
