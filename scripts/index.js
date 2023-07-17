@@ -6,27 +6,40 @@ const addButton = document.querySelector('.profile__add-button');
 const closeAddButton = popupAdd.querySelector('.popup__button-close');
 const profileName = document.querySelector('.profile__name');
 const profileText = document.querySelector('.profile__text');
-const popupInputName = document.querySelector('.popup__input_type_name');
-const popupInputWork = document.querySelector('.popup__input_type_work');
-const popupEditForm = document.querySelector('.popup__form_edit');
-const popupAddForm = document.querySelector('.popup__form_add');
+const popupInputName = document.querySelector('#name-input');
+const popupInputWork = document.querySelector('#work-input');
+const popupEditForm = document.querySelector('#form-edit');
+const popupAddForm = document.querySelector('#form-add');
 const popupImage = document.querySelector('.popup_image');
 const popupPicture = popupImage.querySelector('.popup__picture');
 const popupTitle = popupImage.querySelector('.popup__title');
 const closeImageButton = popupImage.querySelector('.popup__button-close');
-const popupInputPlace = document.querySelector('.popup__input_type_place');
-const popupInputImage = document.querySelector('.popup__input_type_image');
+const popupInputPlace = document.querySelector('#place-input');
+const popupInputImage = document.querySelector('#image-input');
 const elementsGallery = document.querySelector('.elements');
+const saveButton = document.querySelector('.form__button-save');
 
+config = {
+  formSelector: '.form',
+  inputSelector: '.form__input',
+  submitButtonSelector: '.form__button-save',
+  inactiveButtonClass: 'form__button-save_disabled',
+  inputErrorClass: 'form__input_type_error',
+  errorClass: 'form__input-error_active'
+};
 
 //открытие попапа
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keyup', EscClose);
+  popup.addEventListener('click', overlayClose);
 }
 
 //закрытие попапа
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keyup', EscClose);
+  popup.removeEventListener('click', overlayClose);
 };
 
 function fillProfileForm () {
@@ -38,6 +51,7 @@ function fillProfileForm () {
 editProfileButton.addEventListener('click', () => {
   openPopup(popupEdit);
   fillProfileForm();
+  toggleButtonState(inputList, saveButton, config);
 });
 
 // закрытие попапа редактирования профиля
@@ -121,6 +135,22 @@ function openPopupAdd() {
 
 function closePopupAdd() {
   closePopup(popupAdd);
+};
+
+//закрытие попапа esc
+function EscClose(evt) {
+  if (evt.key === 'Escape') {
+    const popup = document.querySelector('.popup_opened');
+    closePopup(popup);
+  }
+};
+
+//закрытие попапа overlay
+function overlayClose(evt) {
+  if (evt.target === evt.currentTarget) {
+    const popup = document.querySelector('.popup_opened');
+    closePopup(popup);
+  }
 };
 
 popupEditForm.addEventListener('submit', editProfile);
