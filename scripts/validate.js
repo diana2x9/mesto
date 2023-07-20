@@ -1,15 +1,15 @@
 //покажем ошибку
 const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add('form__input_type_error');
+  inputElement.classList.add(config.inputErrorClass);
   errorElement.textContent = errorMessage;
-  errorElement.classList.add('form__input-error_active');
+  errorElement.classList.add(config.errorClass);
 };
 //скроем ошибку
 const hideInputError = (formElement, inputElement) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove('form__input_type_error');
-  errorElement.classList.remove('form__input-error_active');
+  inputElement.classList.remove(config.inputErrorClass);
+  errorElement.classList.remove(config.errorClass);
   errorElement.textContent = '';
 };
 //валидация
@@ -31,18 +31,21 @@ const hasInvalidInput = (inputList) => {
   })
 };
 
-// Функция принимает массив полей ввода
-// и элемент кнопки, состояние которой нужно менять
+const disableButton = (buttonElement, config) => {
+  buttonElement.classList.add(config.inactiveButtonClass);
+  buttonElement.disabled = true;
+};
+
+const enableButton = (buttonElement, config) => {
+  buttonElement.classList.remove(config.inactiveButtonClass);
+  buttonElement.disabled = false;
+};
+
 const toggleButtonState = (inputList, buttonElement, config) => {
-  // Если есть хотя бы один невалидный инпут
   if (hasInvalidInput(inputList)) {
-    // сделай кнопку неактивной
-    buttonElement.classList.add(config.inactiveButtonClass);
-    buttonElement.disabled = true; 
+    disableButton(buttonElement, config);
   } else {
-    // иначе сделай кнопку активной
-    buttonElement.classList.remove(config.inactiveButtonClass);
-    buttonElement.disabled = false;  
+    enableButton(buttonElement, config);
   }
 };
 
@@ -55,10 +58,13 @@ const setEventListeners = (formElement,config) => {
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
-      checkInputValidity(formElement, inputElement);
+      checkInputValidity(formElement, inputElement, config);
 
       toggleButtonState(inputList, buttonElement, config);
     });
+    inputElement.addEventListener('change', () => {
+      inputElement.value = inputElement.value.trim();
+    })
   });
 };
 
