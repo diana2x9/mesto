@@ -1,7 +1,7 @@
-import Card from './card.js';
+import Card from './Сard.js';
 import FormValidator from './FormValidator.js';
 import { initialCards } from './constants.js';
-import { config } from './constants.js';
+import { validationConfig } from './constants.js';
 
 const popupEdit = document.querySelector('.popup-edit');
 const editProfileButton = document.querySelector('.profile__edit-button');
@@ -86,14 +86,15 @@ closeImageButton.addEventListener('click', closePopupImage);
 
 function addCard(evt) {
   evt.preventDefault();
-  const items = {};
-  items.name = popupInputPlace.value;
-  items.link = popupInputImage.value;
-  const cardElement = createCardElement (items);
+  const cardData = {
+    name: popupInputPlace.value,
+    link: popupInputImage.value
+  };
+  const cardElement = createCardElement(cardData);
   elementsGallery.prepend(cardElement);
   closePopup(popupAdd);
-  evt.target.reset()
-};
+  formAddCardValidator.disableButton();
+}
 
 popupAddForm.addEventListener('submit', addCard);
 
@@ -102,14 +103,11 @@ function editProfile(evt) {
   evt.preventDefault()
   profileName.textContent = popupInputName.value;
   profileText.textContent = popupInputWork.value;
+  formEditProfileValidator.disableButton;
   closePopup(popupEdit);
 };
 
 popupEditForm.addEventListener('submit', editProfile);
-
-function openPopupAdd() {
-  openPopup(popupAdd);
-};
 
 function closePopupAdd() {
   closePopup(popupAdd);
@@ -133,9 +131,9 @@ function closeByOverlay(evt) {
 closeAddButton.addEventListener('click',closePopupAdd);
 
 //экземпляр валидации редактирования профиля
-const formEditProfileValidator = new FormValidator(config, popupEditForm);
+const formEditProfileValidator = new FormValidator(validationConfig, popupEditForm);
 //экземпляр валидации добавления карточки
-const formAddCardValidator = new FormValidator(config, popupAddForm);
+const formAddCardValidator = new FormValidator(validationConfig, popupAddForm);
 
 //валидация форм
 formEditProfileValidator.enableValidation();

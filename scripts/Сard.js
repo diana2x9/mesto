@@ -12,19 +12,26 @@ export default class Card {
     return cardElement;
   }
 
+  _handleDeleteClick() {
+      this._cardElement.remove(); 
+      this._cardElement = null;
+  }
+
+  _handleLikeClick() {
+    this._likeButton.classList.toggle('elements__heart-button_active');
+}
+
   _setEventListeners() {
     this._deleteButton = this._cardElement.querySelector('.elements__delete-button');
     this._likeButton = this._cardElement.querySelector('.elements__heart-button');
     this._cardImage = this._cardElement.querySelector('.elements__image');
-
-    this._deleteButton.addEventListener('click', () => {
-      this._cardElement.remove();
+   
+    this._deleteButton.addEventListener('click', () => { 
+      this._handleDeleteClick()
     });
-
     this._likeButton.addEventListener('click', () => {
-      this._likeButton.classList.toggle('elements__heart-button_active');
+      this._handleLikeClick()
     });
-
     this._cardImage.addEventListener('click', () => {
       this._handleImageClick(this._name, this._link);
     });
